@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
 use App\Models\ModelBook;
 use App\User;
 
@@ -34,7 +34,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $users=$this->objUser->all();
+        return view('create',compact('users'));
     }
 
     /**
@@ -43,9 +44,17 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        //
+        $cad=$this->objBook->create([
+        'title'=>$request->title,
+        'pages'=>$request->pages,
+        'price'=>$request->price,
+        'id_user'=>$request->id_user
+        ]);
+        if($cad){
+            return redirect('books');
+        }
     }
 
     /**
@@ -56,8 +65,8 @@ class BookController extends Controller
      */
     public function show($id)
     {
-		$book=$this->objBook->find($id);
-        return view('show', compact('book'));
+        $book=$this->objBook->find($id);
+        return view('show',compact('book'));
     }
 
     /**
@@ -68,7 +77,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book=$this->objBook->find($id);
+        $users=$this->objUser->all();
+        return view('create',compact('book','users'));
     }
 
     /**
@@ -78,9 +89,15 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BookRequest $request, $id)
     {
-        //
+        $this->objBook->where(['id'=>$id])->update([
+            'title'=>$request->title,
+            'pages'=>$request->pages,
+            'price'=>$request->price,
+            'id_user'=>$request->id_user
+        ]);
+        return redirect('books');
     }
 
     /**
@@ -91,6 +108,7 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $del=$this->objBook->destroy($id);
+        return($del)?"Livro deletado":"Livro não deletado";
     }
 }

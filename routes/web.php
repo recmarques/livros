@@ -13,5 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/books', 'BookController@index');
+Route::resource('/books', 'BookController');
 Route::get('/books/{books}','BookController@show');
+Route::get('books/create', 'BookController@create');
+Route::get('books/{books}/edit', 'BookController@edit');
+Route::get('books/{books}/delete', 'BookController@destroy');

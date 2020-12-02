@@ -10,5 +10,7 @@
 	
 	<body>
 		<?php echo $__env->yieldContent('content'); ?>
+
+		<script src="<?php echo e(url("assets/js/javascript.js")); ?>">
 	</body>
 </html><?php /**PATH C:\xampp\htdocs\blog\resources\views/templates/template.blade.php ENDPATH**/ ?>
