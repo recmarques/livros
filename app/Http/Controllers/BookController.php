@@ -22,9 +22,9 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {	
-		$book=$this->objBook->all()->sortBy('title');
-        return view('index', compact('book'));
+    {
+        $book=$this->objBook->paginate(5);
+        return view('index',compact('book'));
     }
 
     /**

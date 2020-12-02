@@ -49,7 +49,8 @@
 		  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</tbody>
 		</table>
-		
+		<?php echo e($book->links()); ?>
+
 	</div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('templates.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\blog\resources\views/index.blade.php ENDPATH**/ ?>
